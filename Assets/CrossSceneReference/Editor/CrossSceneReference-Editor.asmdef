@@ -1,0 +1,10 @@
+{
+    "name": "CrossSceneReference",
+    "references": [
+        "CrossSceneReference-Editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
