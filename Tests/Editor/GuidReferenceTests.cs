@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITTEST
+using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
@@ -105,3 +106,4 @@ public class GuidReferenceTests
         AssetDatabase.DeleteAsset(prefabPath);
     }
 }
+#endif

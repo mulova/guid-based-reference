@@ -38,10 +38,13 @@ public class GuidComponent : MonoBehaviour, ISerializationCallbackReceiver
         {
 #if UNITY_EDITOR
             // if in editor, make sure we aren't a prefab of some kind
+#if GUID_PREFAB
+#else
             if (IsAssetOnDisk())
             {
                 return;
             }
+#endif
             Undo.RecordObject(this, "Added GUID");
 #endif
             guid = System.Guid.NewGuid();
@@ -106,20 +109,23 @@ public class GuidComponent : MonoBehaviour, ISerializationCallbackReceiver
     }
 #endif
 
-    // We cannot allow a GUID to be saved into a prefab, and we need to convert to byte[]
-    public void OnBeforeSerialize()
+        // We cannot allow a GUID to be saved into a prefab, and we need to convert to byte[]
+        public void OnBeforeSerialize()
     {
 #if UNITY_EDITOR
         // This lets us detect if we are a prefab instance or a prefab asset.
         // A prefab asset cannot contain a GUID since it would then be duplicated when instanced.
         if (IsAssetOnDisk())
         {
+#if GUID_PREFAB
+#else
             serializedGuid = null;
             guid = System.Guid.Empty;
+#endif
         }
         else
 #endif
-        {
+            {
             if (guid != System.Guid.Empty)
             {
                 serializedGuid = guid.ToByteArray();
@@ -148,13 +154,16 @@ public class GuidComponent : MonoBehaviour, ISerializationCallbackReceiver
         // at a time that lets us detect what we are
         if (IsAssetOnDisk())
         {
+#if GUID_PREFAB
+#else
             serializedGuid = null;
             guid = System.Guid.Empty;
+#endif
         }
         else
 #endif
-        {
-            CreateGuid();
+            {
+                CreateGuid();
         }
     }
 
