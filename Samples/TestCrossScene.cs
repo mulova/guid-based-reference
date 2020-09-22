@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if GUID_PREFAB
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -58,3 +59,4 @@ public class TestCrossScene : MonoBehaviour
     }
    
 }
+#endif
